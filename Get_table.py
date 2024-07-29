@@ -1,7 +1,7 @@
 from Extract_cells import extract_cells
 import cv2
 
-def get_table(image_name, page_no):
+def get_table(image_name, page_no, pdf_name):
     image = image_name
     
     ## Filters
@@ -29,6 +29,6 @@ def get_table(image_name, page_no):
         # Crop the table region from the original image
         table_image = image[y:y+h, x:x+w]
         num_rows = 0
-        extract_cells(table_image, page_no)
+        extract_cells(table_image, page_no, pdf_name)
     else:
         print("error")

@@ -1,4 +1,5 @@
 from Get_table import get_table
+from Extract_cells import reset_rows
 
 import os
 import io
@@ -11,17 +12,18 @@ import numpy as np
 def read_pdf(pdf_path):
     pdf_document = pymupdf.open(pdf_path)
     global rows_written
-    rows_written = 0
 
-    if not os.path.exists('outputs'):
-        os.makedirs('outputs')
+    pdf_name = pdf_path[:-4]
+
+    if not os.path.exists(f'outputs/{pdf_name}'):
+        os.makedirs(f'outputs/{pdf_name}')
     
     
     #Clearing any past file
-    with open('outputs/output.csv', mode='w') as csv_file:
+    with open(f'outputs/{pdf_name}/output.csv', mode='w') as csv_file:
         csv_writer = csv.writer(csv_file)
     
-    with open('outputs/attention.txt', mode='w') as txt_file:
+    with open(f'outputs/{pdf_name}/attention.txt', mode='w') as txt_file:
         txt_write = txt_file.write('')
 
     
@@ -38,4 +40,6 @@ def read_pdf(pdf_path):
         image = PILImage.open(io.BytesIO(img_bytes))
 
         image = np.array(image)
-        get_table(image, page_number)
+        get_table(image, page_number, pdf_name)
+
+    reset_rows()

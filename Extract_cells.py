@@ -5,7 +5,8 @@ import numpy as np
 
 rows_written = 0
 
-def extract_cells(table_image,  page_no, csv_filename='outputs/output.csv'):
+def extract_cells(table_image,  page_no, pdf_name):
+    csv_filename = f'outputs/{pdf_name}/output.csv'
     image = table_image
     global rows_written
     # Determine number of rows using page height
@@ -64,7 +65,7 @@ def extract_cells(table_image,  page_no, csv_filename='outputs/output.csv'):
                 if col < 4:
                    row_cells.append(ocr_prediction(cell_image)[0][1])
                    if len(ocr_prediction(cell_image)) > 1:
-                       txt_file = open("outputs/attention.txt", "a", newline="\n")
+                       txt_file = open(f"outputs/{pdf_name}/attention.txt", "a", newline="\n")
                        txt_file.write(f"Attention needed at: SNo. {rows_written + row} , {col_names[col]} \n")
                 if col == 4:
                     row_cells.append(hand_prediction(cell_image))
@@ -74,3 +75,8 @@ def extract_cells(table_image,  page_no, csv_filename='outputs/output.csv'):
             
     print(f"Written {num_rows} row(s) to '{csv_filename}'.")
     rows_written += num_rows
+
+
+def reset_rows():
+    global rows_written
+    rows_written = 0
