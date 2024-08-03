@@ -1,5 +1,5 @@
-from Get_table import get_table
-from Extract_cells import reset_rows
+from libs.Get_table import get_table
+from libs.Extract_cells import reset_rows
 
 import os
 import io

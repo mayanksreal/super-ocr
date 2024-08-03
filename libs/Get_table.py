@@ -1,4 +1,4 @@
-from Extract_cells import extract_cells
+from libs.Extract_cells import extract_cells
 import cv2
 
 def get_table(image_name, page_no, pdf_name):

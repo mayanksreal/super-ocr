@@ -1,5 +1,5 @@
 
-from build_model import build_model
+from libs.build_model import build_model
 
 model = build_model()
 
@@ -26,7 +26,11 @@ def hand_prediction(image, model=model):
     contours = sorted(contours, key=lambda ctr: cv2.boundingRect(ctr)[0])
 
     global result
+    global probab
+    global n
     result = 0
+    probab = 0
+    n = 0
 
     for ctr in contours:
         result = result*10
@@ -52,5 +56,9 @@ def hand_prediction(image, model=model):
         digit = resized_digit / 255.0
 
         #prediction
-        result = result + np.argmax(model.predict(digit.reshape(1,28,28,1)))
-    return result
+        result = model.predict(digit.reshape(1,28,28,1))
+        result = result + np.argmax(result)
+        probab = probab + max(max(result))
+        n += 1
+        
+    return [result,probab/n]

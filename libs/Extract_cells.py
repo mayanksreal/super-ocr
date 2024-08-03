@@ -1,6 +1,7 @@
-from ocr import ocr_prediction
-from cnn import hand_prediction
+from libs.ocr import ocr_prediction
+from libs.cnn import hand_prediction
 import csv
+import cv2
 import numpy as np
 
 rows_written = 0
@@ -21,7 +22,7 @@ def extract_cells(table_image,  page_no, pdf_name):
     
     # Column widths (adjust these values according to your table)
     col_names = ["SNo.","ID","NAME","DOB","INTERVIEW MARKS"]
-    column_widths = [67, 73, 392 + (num_rows * 2), 175, 380]
+    column_widths = [67, 73, 392 + (num_rows * 2), 175, 420]
     
     # Function to get the column boundaries
     def get_column_boundaries(column_widths):
@@ -45,8 +46,10 @@ def extract_cells(table_image,  page_no, pdf_name):
             for col in range(0,5):
                 cell = header_row[:, column_boundaries[col]:column_boundaries[col + 1]]
                 cell_image = np.array(cell)
-                header_cells.append(ocr_prediction(cell_image)[0][1])
-            
+                try:
+                    header_cells.append(ocr_prediction(cell_image)[0][1])
+                except Exception:
+                    header_cells.append("ERR")
             # Write the header row to the CSV
             csv_writer.writerow(header_cells)
         
@@ -63,12 +66,23 @@ def extract_cells(table_image,  page_no, pdf_name):
                 cell = table_row[:, column_boundaries[col]:column_boundaries[col + 1]]
                 cell_image = np.array(cell)
                 if col < 4:
-                   row_cells.append(ocr_prediction(cell_image)[0][1])
-                   if len(ocr_prediction(cell_image)) > 1:
-                       txt_file = open(f"outputs/{pdf_name}/attention.txt", "a", newline="\n")
-                       txt_file.write(f"Attention needed at: SNo. {rows_written + row} , {col_names[col]} \n")
+                    try:
+                        row_cells.append(ocr_prediction(cell_image)[0][1])
+                        if len(ocr_prediction(cell_image)) > 1:
+                            txt_file = open(f"outputs/{pdf_name}/attention.txt", "a", newline="\n")
+                            txt_file.write(f"Attention needed at: SNo. {rows_written + row} , {col_names[col]} \n")
+                    except Exception:
+                        row_cells.append("ERR")
+                        txt_file = open(f"outputs/{pdf_name}/attention.txt", "a", newline="\n")
+                        txt_file.write(f"Attention needed at: SNo. {rows_written + row} , {col_names[col]} \n")
+
                 if col == 4:
-                    row_cells.append(hand_prediction(cell_image))
+                    pred = hand_prediction(cell_image)
+                    row_cells.append(pred[0])
+                    if (pred[1] < 0.95 ):
+                        txt_file = open(f"outputs/{pdf_name}/attention.txt", "a", newline="\n")
+                        txt_file.write(f"Attention needed at: SNo. {rows_written + row} , {col_names[col]} \n")
+                        
             
             # Write the row to the CSV
             csv_writer.writerow(row_cells)
