@@ -1,5 +1,6 @@
 
-from models import build_model
+from build_model import build_model
+
 model = build_model()
 
 def hand_prediction(image, model=model):
