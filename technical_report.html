@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Extraction and Digitization of Structured Interview Assessment Data from Scanned Documents</title>
+    <style>
+        :root {
+            --primary-color: #111;
+            --text-color: #222;
+            --bg-color: #fff;
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: "Times New Roman", Times, Baskerville, Georgia, serif;
+            font-size: 14pt;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .paper-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 0 40px;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        /* Title Area */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 20pt;
+            font-weight: bold;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            font-size: 16pt;
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #444;
+        }
+
+        .meta-info {
+            font-size: 12pt;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .author {
+            font-size: 13pt;
+            font-weight: normal;
+            margin-bottom: 5px;
+        }
+
+        .date {
+            font-size: 12pt;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        /* Headings */
+        h2 {
+            font-size: 14pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--primary-color);
+            padding-bottom: 3px;
+            letter-spacing: 0.5px;
+        }
+
+        h3 {
+            font-size: 13pt;
+            font-weight: bold;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        /* Abstract */
+        .abstract-box {
+            margin: 30px 40px;
+            font-size: 11.5pt;
+            line-height: 1.5;
+        }
+
+        .abstract-box strong {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 11pt;
+        }
+
+        /* Contents block */
+        .contents-box {
+            border: 1px solid var(--border-color);
+            padding: 15px 20px;
+            margin: 30px 0;
+            font-size: 11pt;
+            background-color: #fafafa;
+        }
+        .contents-box strong {
+            display: block;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-size: 10pt;
+            letter-spacing: 0.5px;
+        }
+
+        /* Blockquotes */
+        blockquote {
+            margin: 20px 0;
+            padding-left: 20px;
+            border-left: 3px solid #666;
+            font-style: italic;
+            color: #333;
+        }
+
+        /* Lists */
+        ul {
+            margin-top: 10px;
+            margin-bottom: 15px;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        /* Tables */
+        .table-container {
+            margin: 30px 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11pt;
+            margin-bottom: 8px;
+        }
+
+        th, td {
+            border-top: 1px solid var(--primary-color);
+            border-bottom: 1px solid var(--primary-color);
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        th {
+            font-weight: bold;
+            background-color: #fcfcfc;
+        }
+
+        .table-caption {
+            font-size: 11pt;
+            font-style: italic;
+            margin-top: 5px;
+            text-align: justify;
+        }
+
+        /* Footer / Responsive */
+        footer {
+            margin-top: 60px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            font-size: 10pt;
+            text-align: center;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 13pt;
+            }
+            .paper-container {
+                padding: 0 15px;
+                margin: 20px auto;
+            }
+            .abstract-box {
+                margin: 20px 10px;
+            }
+            th, td {
+                padding: 6px 6px;
+                font-size: 10pt;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="paper-container">
+
+    <header>
+
+	<p style="color: #c00; font-style: italic; font-size: 14pt; text-align: center; margin-bottom: 20px;">
+    *Following is documentation of a research project and is not a peer-reviewed research article.
+	</p>
+
+        <h1>Digital Transformation of Assessment Process through Intelligent Data Capture</h1>
+        <div class="subtitle">Eliminating manual data entry in recruitment process through AI-based extraction of scores from assessment documents.</div>
+        <p class="meta-info"><strong>Technical Report</strong></p>
+        
+        <div class="author"><strong>Mayank Sharma</strong></div>
+        <div class="meta-info">
+            Department of Information Technology, Guru Tegh Bahadur Institute of Technology, GGSIPU<br>
+            Research internship conducted at the Recruitment and Assessment Centre (RAC), Defence Research and Development Organisation (DRDO)<br>
+            Project Mentor: Ms. Sumedha Mehta, Scientist 'B', RAC, DRDO
+        </div>
+        <div class="date">October 2024</div>
+    </header>
+
+    <hr style="border: 0; border-top: 1px double #000; margin: 25px 0;">
+
+    <div class="abstract-box">
+        <strong>Abstract</strong>— Manual transcription of interview-assessment records from scanned documents is a significant operational bottleneck for organizations that process large volumes of tabular, semi-structured paperwork containing both machine-printed and handwritten content. This report presents the design, implementation, and evaluation of an automated document-digitization pipeline developed to extract candidate assessment data — printed identifiers and handwritten numerical marks — from scanned multi-page PDF interview sheets and convert them into a structured, spreadsheet-interoperable format. The system combines classical computer-vision techniques for document layout and table-cell segmentation with two learned components: a pre-trained deep-learning OCR engine (EasyOCR) for printed-text recognition, and a purpose-built convolutional neural network (CNN), trained on the MNIST handwritten-digit corpus, for handwritten mark recognition. Four candidate neural architectures — a shallow dense network, a deep dense network, a funnelling dense network, and a convolutional network — were empirically compared on the digit-recognition sub-task; the CNN was selected on the basis of superior validation and test accuracy. To address the residual error inherent in fully automated recognition on noisy, real-world scans, the system incorporates a confidence-gated human-in-the-loop feedback mechanism: predictions below a fixed confidence threshold are routed to a human reviewer, and the corrected labels are used to fine-tune the CNN online, improving recognition accuracy over the course of a processing run. The resulting pipeline achieves high recognition accuracy on both clean and visually degraded ("whitewashed") scans while substantially reducing manual data-entry effort. This report situates the work within the broader literature on document image analysis, OCR, and human-in-the-loop machine learning, and discusses the system's methodology, experimental results, limitations, and directions for future work, including the applicability of such pipelines to digital-transformation initiatives in records-intensive organizations.
+    </div>
+
+    <div class="contents-box">
+        <strong>Contents</strong>
+        <a href="#section-1">1. Introduction</a> &nbsp;|&nbsp; 
+        <a href="#section-2">2. Related Work</a> &nbsp;|&nbsp; 
+        <a href="#section-3">3. Theoretical Background</a> &nbsp;|&nbsp; 
+        <a href="#section-4">4. System Design and Methodology</a> &nbsp;|&nbsp; 
+        <a href="#section-5">5. Experimental Setup</a> &nbsp;|&nbsp; 
+        <a href="#section-6">6. Results and Discussion</a> &nbsp;|&nbsp; 
+        <a href="#section-7">7. Conclusion and Future Work</a> &nbsp;|&nbsp; 
+        <a href="#section-8">8. Acknowledgements</a> &nbsp;|&nbsp; 
+    </div>
+
+    <h2 id="section-1">1. Introduction</h2>
+    
+    <h3>1.1 Background and Motivation</h3>
+    <p>Government and defence-sector organizations routinely generate large volumes of paper-based records during recruitment, assessment, and evaluation processes. The Recruitment and Assessment Centre (RAC), a laboratory of the Defence Research and Development Organisation (DRDO), is responsible for the psychological and professional assessment of candidates for technical and scientific roles. As part of this process, interview panels record candidate evaluations on standardized paper sheets that combine machine-printed structural elements — headers, candidate identifiers, and table layouts — with handwritten numerical marks entered by panel members. These sheets are subsequently scanned and archived as PDF documents.</p>
+    <p>Historically, the transcription of this data into digital, analyzable form (e.g., spreadsheets or databases) has been performed manually: a reviewer opens each scanned page, reads the relevant cells, and re-types the values into a spreadsheet. This process is slow, labour-intensive, and prone to transcription error, particularly at scale. It also represents a broader class of problem common to many records-intensive institutions — public administration, healthcare, education, and finance — in which legacy paper workflows constrain downstream data analytics and digital-transformation efforts. Automating the extraction of structured data from scanned forms is therefore both a practical operational need and a representative case study in document image analysis and applied machine learning.</p>
+
+    <h3>1.2 Problem Statement</h3>
+    <p>The scanned interview sheets present three coupled technical challenges that preclude the use of a single off-the-shelf tool:</p>
+    <ul>
+        <li><strong>Layout variability:</strong> table borders, cell dimensions, and print quality vary across documents and even across pages within the same document, making naive text extraction unreliable.</li>
+        <li><strong>Mixed content types:</strong> each table cell may contain either machine-printed text (e.g., candidate roll numbers, category labels) or a handwritten numerical mark (e.g., an interview score), each of which requires a different recognition strategy.</li>
+        <li><strong>Recognition reliability:</strong> general-purpose OCR engines are tuned for printed text and perform poorly on handwritten content, while handwriting-recognition models trained on clean benchmark datasets (such as MNIST) do not transfer perfectly to noisy, real-world scans — some of which exhibit scanning artefacts such as uneven illumination or partial fading ("whitewashing").</li>
+    </ul>
+    <p>A viable solution must therefore decompose the document into structural regions, apply an appropriate recognition method to each region, and provide a mechanism to detect and correct low-confidence predictions without reintroducing the full manual-entry burden the system is intended to remove.</p>
+
+    <h3>1.3 Objectives and Scope</h3>
+    <p>The objective of this work was to design and implement an end-to-end pipeline that:</p>
+    <ul>
+        <li>Accepts scanned, multi-page PDF interview sheets as input.</li>
+        <li>Automatically detects table structure and segments individual cells using classical image-processing techniques.</li>
+        <li>Extracts printed text from the relevant cells using a deep-learning-based OCR engine.</li>
+        <li>Recognizes handwritten numerical marks using a CNN trained for digit classification.</li>
+        <li>Incorporates a confidence-gated human review step, with the corrected labels used to improve the model at inference time.</li>
+        <li>Outputs the extracted data in a structured, spreadsheet-interoperable format (CSV, compatible with Microsoft Excel).</li>
+    </ul>
+    <p>The scope of the project was limited to the extraction pipeline itself; downstream analytics on the extracted data, and generalization to document layouts beyond the RAC interview-sheet format, were treated as directions for future work rather than implemented features.</p>
+
+    <h3>1.4 Report Organization</h3>
+    <p>Section 2 reviews related work in optical character recognition, document layout analysis, handwritten-digit recognition, and human-in-the-loop machine learning. Section 3 presents the theoretical background necessary to motivate the design choices made in the system. Section 4 describes the system architecture and methodology in detail. Section 5 describes the experimental setup used to evaluate the system's components. Section 6 presents and discusses the results. Section 7 concludes the report and outlines future work.</p>
+
+    <h2 id="section-2">2. Related Work</h2>
+    <p>This work draws on four bodies of literature: optical character recognition, document layout and table detection, handwritten-character recognition using convolutional neural networks, and human-in-the-loop / active-learning approaches to reducing labelled-data and supervision costs in applied machine-learning systems.</p>
+    
+    <h3>2.1 Optical Character Recognition</h3>
+    <p>Optical character recognition has progressed from rule-based template matching to statistical and, subsequently, deep-learning-based methods. Classical engines such as Tesseract combine adaptive thresholding, connected-component analysis, and a two-pass recognition strategy to extract printed text from document images (Smith, 2007). More recent OCR systems replace hand-engineered feature pipelines with end-to-end trainable neural architectures — typically a convolutional feature extractor followed by a recurrent or attention-based sequence decoder — which generalize better across fonts, languages, and image quality. EasyOCR, the engine used in this project, follows this deep-learning paradigm and was selected for its ease of deployment, multilingual support, and reported robustness relative to classical engines on non-uniform, real-world scans.</p>
+
+    <h3>2.2 Document Layout and Table Detection</h3>
+    <p>Extracting data from tabular documents first requires reliable localization of table and cell boundaries. A long-standing approach, and the one adopted in this project, is contour-based structural analysis of binarized document images, following the border-following algorithm of Suzuki and Abe (1985), which underlies OpenCV's contour-detection routines. This approach identifies closed boundaries corresponding to table gridlines and cells directly from pixel connectivity, without requiring a learned model, and is computationally inexpensive relative to learned layout-detection networks — an important consideration given the project's deployment constraints. Learned alternatives, such as region-based or transformer-based table-detection models, offer greater robustness to borderless or irregular tables but require substantially more training data and computational resources than were available or necessary for the relatively consistent layout of the RAC interview sheets.</p>
+
+    <h3>2.3 Handwritten Character Recognition with Convolutional Neural Networks</h3>
+    <p>Convolutional neural networks have been the dominant architecture for handwritten-digit recognition since LeCun et al. (1998) demonstrated that gradient-based, convolutional architectures (the LeNet family) trained on large labelled datasets outperform earlier template- and feature-based classifiers on document-recognition tasks. The MNIST dataset introduced in that work remains a standard benchmark and training corpus for handwritten-digit classifiers, and is used in this project as the base training set for the handwritten-mark recognition model. Subsequent developments — including deeper convolutional architectures (Krizhevsky, Sutskever & Hinton, 2012) and regularization techniques such as dropout (Srivastava et al., 2014), both employed in this project's model — have further improved the accuracy and generalization of CNN-based image classifiers.</p>
+
+    <h3>2.4 Human-in-the-Loop and Active Learning</h3>
+    <p>Fully automated recognition systems, however accurate on benchmark data, typically exhibit a non-trivial residual error rate when deployed on out-of-distribution, real-world inputs. A well-established mitigation strategy is to keep a human reviewer in the loop for the subset of predictions the model is least confident about, rather than for the entire dataset — a form of uncertainty-based active learning (Settles, 2009). This project adopts that principle directly: predictions falling below a fixed confidence threshold are flagged for manual verification, and the corrected labels are used to incrementally fine-tune the model, so that the system's accuracy improves over the course of a processing run rather than remaining static.</p>
+
+    <h2 id="section-3">3. Theoretical Background</h2>
+    
+    <h3>3.1 Optical Character Recognition</h3>
+    <p>OCR refers to the class of techniques that convert an image of text into machine-encoded text. A typical OCR pipeline comprises pre-processing (binarization, noise removal, skew correction), text-region detection, character or word segmentation, and classification. Three broad strategies exist:</p>
+    <ul>
+        <li>Template matching, in which candidate glyphs are compared directly against a library of reference character shapes; this is simple but brittle to font, scale, and noise variation.</li>
+        <li>Feature-based extraction, in which hand-engineered descriptors (edges, curvature, stroke direction) are computed and classified using conventional statistical classifiers.</li>
+        <li>Deep-learning-based OCR, in which a convolutional network learns discriminative features directly from labelled image data, typically followed by a recurrent or attention-based decoder for sequence recognition; this is the dominant modern approach and the one used by EasyOCR.</li>
+    </ul>
+    <p>Deep-learning-based OCR was adopted in this project because it is markedly more robust to the font and print-quality variation observed across scanned interview sheets than either template matching or hand-engineered feature extraction, at the cost of requiring a pre-trained model rather than a lightweight rule-based system.</p>
+
+    <h3>3.2 Convolutional Neural Networks</h3>
+    <p>A convolutional neural network is a class of feed-forward neural network specialized for grid-structured data such as images. Its defining components are:</p>
+    <ul>
+        <li><strong>Convolutional layers</strong>, which apply a bank of learned filters across the spatial extent of the input, producing feature maps that respond to local patterns such as edges, corners, and strokes. Because the same filter weights are applied at every spatial location, convolutional layers require far fewer parameters than fully connected layers operating on raw pixels, and are inherently translation-equivariant.</li>
+        <li><strong>Non-linear activation</strong> (in this project, the Rectified Linear Unit, ReLU), which introduces the non-linearity necessary for the network to model complex decision boundaries.</li>
+        <li><strong>Pooling layers</strong> (max pooling), which downsample feature maps, reducing spatial dimensionality and providing a degree of translation invariance while retaining the most salient activations.</li>
+        <li><strong>Dropout</strong>, a regularization technique that randomly deactivates a proportion of units during training, reducing overfitting by preventing co-adaptation of feature detectors (Srivastava et al., 2014).</li>
+        <li><strong>Fully connected layers</strong>, which combine the extracted features into class scores, typically passed through a softmax function to yield a probability distribution over output classes.</li>
+    </ul>
+    <p>The network is trained by minimizing a categorical cross-entropy loss between predicted and true class labels via stochastic gradient-based optimization (backpropagation). For the ten-class handwritten-digit-recognition problem addressed in this project, the output layer applies softmax over ten units, corresponding to digits 0–9.</p>
+
+    <h3>3.3 Contour-Based Table and Cell Detection</h3>
+    <p>Table and cell boundaries in the scanned documents were localized using contour detection, a classical computer-vision technique implemented in OpenCV. The document image is first binarized (typically via adaptive thresholding), after which a border-following algorithm traces the boundaries of connected regions of foreground pixels (Suzuki & Abe, 1985). Because table gridlines form closed rectangular contours, filtering detected contours by shape (approximate rectangularity) and size yields the coordinates of individual table cells. This approach is deterministic, requires no training data, and is computationally efficient, making it well suited to a document set with a relatively consistent grid-based layout.</p>
+
+    <h3>3.4 Computational Environment</h3>
+    <p>All model development, training, and inference were carried out on Google Colaboratory, a hosted Jupyter-notebook environment providing on-demand access to GPU acceleration. Training was performed on an NVIDIA T4 GPU, which substantially reduced training time for the CNN relative to CPU-only execution and enabled iterative experimentation across multiple candidate architectures within the project timeline.</p>
+
+    <h2 id="section-4">4. System Design and Methodology</h2>
+    
+    <h3>4.1 Pipeline Overview</h3>
+    <p>The system is organized as a five-stage pipeline: (i) page processing, (ii) table and cell detection, (iii) printed-text extraction, (iv) handwritten-mark recognition, and (v) structured data output, with an additional confidence-gated human-feedback loop operating on stage (iv). Each stage is described in the following subsections.</p>
+
+    <h3>4.2 Page Processing</h3>
+    <p>Scanned interview sheets are provided as multi-page PDF documents. The PyMuPDF library is used to render each page of the PDF as a raster image, which is then processed independently by the downstream pipeline stages. Operating on individual page images, rather than the PDF document as a whole, simplifies the subsequent computer-vision operations and allows pages to be processed in parallel.</p>
+
+    <h3>4.3 Table and Cell Detection</h3>
+    <p>Each page image is binarized and passed through OpenCV's contour-detection routines (Section 3.3) to identify the boundaries of the interview-sheet table and its constituent cells. Detected contours are filtered by geometric criteria (approximate rectangularity, minimum and maximum area) to discard spurious contours arising from scanning noise or non-tabular page content. The output of this stage is a set of bounding boxes, one per cell, each labelled according to its expected content type (printed identifier field or handwritten mark field) based on its position within the known table schema.</p>
+
+    <h3>4.4 Printed Text Extraction</h3>
+    <p>Cells identified as containing printed text are cropped from the page image and passed to EasyOCR, a deep-learning-based OCR engine. For each cell, EasyOCR returns the detected bounding box of the text region, the recognized text string, and an associated confidence score. EasyOCR was selected over classical engines such as Tesseract because its convolutional-recurrent architecture is more robust to the font and print-quality variability present in the scanned corpus, and because it can be deployed directly via a Python package without additional configuration.</p>
+
+    <h3>4.5 Handwritten Mark Recognition</h3>
+    
+    <h3>4.5.1 Architecture Selection</h3>
+    <p>Because no single neural-network architecture is optimal across all image-classification tasks, four candidate architectures were implemented and empirically compared on the handwritten-digit-recognition sub-task, using validation and held-out test accuracy as the selection criteria. All four models were trained on the MNIST handwritten-digit dataset under comparable training conditions. Table 1 summarizes the architectures and their measured performance.</p>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Architecture</th>
+                    <th>Layer Configuration</th>
+                    <th>Validation Accuracy</th>
+                    <th>Test Accuracy</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Simple Neural Network</strong></td>
+                    <td>Input &rarr; Flatten &rarr; Dense(64, ReLU) &rarr; Dropout(0.2) &rarr; Dense(10, Softmax)</td>
+                    <td>0.977</td>
+                    <td>0.9696</td>
+                </tr>
+                <tr>
+                    <td><strong>Deep Neural Network</strong></td>
+                    <td>Input &rarr; Flatten &rarr; [Dense(64, ReLU) &rarr; Dropout(0.2)] &times; 3 &rarr; Dense(10, Softmax)</td>
+                    <td>0.975</td>
+                    <td>0.9686</td>
+                </tr>
+                <tr>
+                    <td><strong>Funnelling Deep NN</strong></td>
+                    <td>Input &rarr; Flatten &rarr; Dense(256, ReLU) &rarr; Dropout(0.2) &rarr; Dense(128, ReLU) &rarr; Dropout(0.2) &rarr; Dense(64, ReLU) &rarr; Dropout(0.2) &rarr; Dense(10, Softmax)</td>
+                    <td>0.9786</td>
+                    <td>0.9788</td>
+                </tr>
+                <tr>
+                    <td><strong>Convolutional NN</strong></td>
+                    <td>Input &rarr; [Conv2D &rarr; MaxPooling2D &rarr; Dropout] &times; 2 &rarr; Flatten &rarr; Dense(32, ReLU) &rarr; Dropout &rarr; Dense(10, Softmax)</td>
+                    <td>0.9954</td>
+                    <td>0.9908</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="table-caption"><strong>Table 1.</strong> Comparison of candidate neural-network architectures on the MNIST handwritten-digit classification task.</div>
+    </div>
+
+    <p>The purely dense (fully connected) architectures — simple, deep, and funnelling — treat the input image as an unstructured vector of pixel intensities and therefore discard spatial locality information. Increasing depth alone (deep network) did not improve on the simple network, while increasing width in a funnelling configuration gave a modest improvement, consistent with the general observation that additional dense capacity primarily helps when the network has enough capacity to model higher-order pixel interactions, but cannot compensate for the absence of the translation-equivariant structure that convolutional layers provide. The convolutional architecture, which explicitly models local spatial patterns via learned filters, outperformed all three dense architectures by a clear margin on both validation and test accuracy, confirming the theoretical expectation (Section 3.2) that convolutional inductive bias is well matched to image-classification tasks. The CNN was therefore selected as the production architecture for handwritten-mark recognition.</p>
+
+    <h3>4.5.2 Final Architecture and Training Configuration</h3>
+    <p>The selected CNN consists of two convolutional blocks, each comprising a 2D convolutional layer, a max-pooling layer, and dropout regularization, followed by a flattening operation, a fully connected layer of 32 ReLU units with dropout, and a final softmax output layer over ten digit classes. This configuration was chosen to balance recognition accuracy against training and inference time, given the project's deployment requirement of near-real-time inference during document processing.</p>
+    <p>The model was trained on the MNIST training set for 20 epochs, which was found empirically to be sufficient to reach the accuracy reported in Table 1 before the onset of overfitting; further hyperparameter tuning beyond this configuration yielded negligible additional improvement. Early stopping, combined with retention of the best-performing weights observed during training (rather than the weights from the final epoch), was used to guard against overfitting, allowing the training-epoch budget to be set generously without risk of degrading final model quality. On the Colab T4 GPU environment, training to convergence required approximately one minute, which was an important practical consideration given that the model is subsequently fine-tuned online during deployment (Section 4.6).</p>
+    <p>At inference time, the model produces a single-digit prediction per cropped cell image. Where a table cell is expected to contain a multi-digit numeric mark, the pipeline concatenates sequential single-digit predictions using positional-value arithmetic (each new digit prediction d updates the accumulated result as result = result &times; 10 + d), reconstructing the full multi-digit value from left to right.</p>
+
+    <h3>4.5.3 Human-in-the-Loop Feedback and Online Fine-Tuning</h3>
+    <p>Two sources of residual error were identified during development: (i) EasyOCR occasionally returns multiple candidate readings with low confidence for printed-text cells, and (ii) the CNN's digit predictions, while highly accurate on the MNIST test set, are less reliable on real-world handwritten marks that differ in stroke style, pressure, or scan quality from the training distribution.</p>
+    <p>For printed-text extraction, low-confidence OCR outputs are surfaced to a human reviewer, whose corrections are written back into the output CSV. Because EasyOCR is a large, pre-trained model, it is not practical to fine-tune it on the limited volume of correction data generated during a single processing run; corrections therefore improve the immediate output but do not alter the model's future predictions on similar inputs.</p>
+    <p>For handwritten-mark recognition, a confidence threshold of 0.95 is applied to each CNN prediction. Predictions below this threshold trigger display of the cropped cell image to a human reviewer, who supplies the correct label. Unlike the OCR correction path, this corrected label is used to perform an incremental (single-example) fine-tuning update of the CNN, and the updated model weights are persisted and reloaded for subsequent predictions within the same and future processing runs. This closes the loop between human correction and model improvement, so that recognition accuracy on the specific handwriting styles encountered in a given batch of documents improves as processing proceeds, rather than repeating the same error indefinitely.</p>
+
+    <h3>4.6 Data Structuring and Output Generation</h3>
+    <p>Extracted printed-text values, reconstructed handwritten-mark values, and any human-supplied corrections are assembled into tabular records using Python's CSV module and written to a CSV file, one row per candidate record. CSV was chosen as the output format for its universality and direct interoperability with spreadsheet software such as Microsoft Excel, allowing the extracted data to be consumed by existing downstream review and analysis workflows without additional format conversion.</p>
+
+    <h2 id="section-5">5. Experimental Setup</h2>
+    
+    <h3>5.1 Datasets</h3>
+    <p>Two distinct datasets were used in this project. The handwritten-digit-recognition model was trained and evaluated on the MNIST dataset, a standard benchmark corpus of 70,000 labelled grayscale images of handwritten digits (0–9). The end-to-end pipeline was evaluated on a corpus of scanned, multi-page PDF interview-assessment sheets provided by RAC, comprising both well-scanned pages and a subset of visually degraded ("whitewashed") pages exhibiting faded or unevenly illuminated content, representative of the print and scan-quality variation encountered in operational archives.</p>
+
+    <h3>5.2 Computational Environment</h3>
+    <p>Development and training were conducted in Google Colaboratory using an NVIDIA T4 GPU. Page processing used PyMuPDF; table and cell detection used OpenCV; printed-text extraction used EasyOCR; handwritten-mark recognition used a TensorFlow/Keras implementation of the CNN described in Section 4.5.2; output generation used Python's standard CSV module.</p>
+
+    <h3>5.3 Evaluation Metrics</h3>
+    <p>Two categories of metric were used to evaluate system performance:</p>
+    <ul>
+        <li>Classification accuracy (validation and held-out test accuracy) for the handwritten-digit-recognition model, used to compare candidate architectures (Section 4.5.1) and to characterize final model performance.</li>
+        <li>End-to-end extraction accuracy, assessed by comparing pipeline output against manually verified ground truth for both printed-text and handwritten-mark fields, both prior to and after the application of the confidence-gated human-feedback mechanism, and separately for well-scanned and degraded ("whitewashed") document subsets.</li>
+    </ul>
+
+    <h2 id="section-6">6. Results and Discussion</h2>
+    
+    <h3>6.1 Neural Network Architecture Comparison</h3>
+    <p>As reported in Table 1, the convolutional architecture achieved the highest validation (0.9954) and test (0.9908) accuracy among the four candidates evaluated, outperforming the next-best architecture (the funnelling dense network) by approximately 1.7 percentage points on validation accuracy and 1.2 percentage points on test accuracy. This result is consistent with the established literature on image classification (Section 2.3) and confirms that, for this task, the inductive bias afforded by convolutional weight sharing and local connectivity outweighs any advantage of increased dense-layer capacity.</p>
+
+    <h3>6.2 Printed-Text Extraction Performance</h3>
+    <p>Printed-text extraction accuracy was assessed by comparison against manually verified transcriptions. EasyOCR produced reliable extractions for the majority of printed fields; residual errors were concentrated in low-confidence, ambiguous character sequences, which were successfully surfaced to the human-review stage via the confidence-gated feedback mechanism (Section 4.5.3), preventing such errors from propagating uncorrected into the final output.</p>
+
+    <h3>6.3 Handwritten-Mark Recognition and the Effect of the Feedback Loop</h3>
+    <p>Deployed on real-world handwritten marks, the CNN's out-of-the-box recognition accuracy was measurably lower than its MNIST test accuracy, reflecting the expected distribution shift between the clean MNIST benchmark and handwriting collected under field conditions. Application of the confidence-gated human-feedback and online-fine-tuning mechanism improved recognition accuracy to above 99% over the course of processing, with the correction rate — and therefore the volume of human interventions required — decreasing as the model adapted to the handwriting styles present in a given document batch. This demonstrates the practical value of coupling a moderately accurate base model with a lightweight, targeted human-in-the-loop correction mechanism, rather than relying solely on either fully automated inference or fully manual transcription.</p>
+
+    <h3>6.4 Robustness on Degraded ("Whitewashed") Scans</h3>
+    <p>On the subset of visually degraded, "whitewashed" pages, both the OCR and handwritten-mark recognition components exhibited a higher rate of low-confidence predictions, and consequently triggered the human-feedback mechanism more frequently than on well-scanned pages. Despite this increased reliance on human correction, the system maintained an overall extraction accuracy above 95% on this degraded subset, indicating that the confidence-gated feedback design is effective at preserving output reliability under adverse scan-quality conditions, at the cost of a proportionally higher (though still substantially reduced, relative to fully manual transcription) level of human involvement.</p>
+
+    <h3>6.5 Limitations</h3>
+    <p>Several limitations of the current system should be noted. First, the table- and cell-detection stage relies on contour-based structural analysis tuned to the specific layout of the RAC interview sheets; generalization to substantially different table layouts would require re-tuning or replacement with a learned layout-detection model. Second, because EasyOCR is not fine-tuned during deployment, its error patterns on any particular document style or degradation mode will recur across a processing run, unlike the handwritten-mark model, which adapts online. Third, evaluation was conducted on a single institutional document corpus; broader claims of generalization to other handwriting populations or document formats would require evaluation on additional, independent datasets. Finally, the reliance on a human reviewer for low-confidence predictions means the system's throughput, while substantially better than fully manual transcription, is not fully autonomous.</p>
+
+    <h2 id="section-7">7. Conclusion and Future Work</h2>
+    <p>This report presented the design and evaluation of an automated pipeline for extracting structured interview-assessment data from scanned documents containing both printed and handwritten content. The system combines classical, deterministic computer-vision techniques for document-layout and table-cell segmentation with two learned components — a pre-trained deep-learning OCR engine for printed text and a purpose-selected convolutional neural network for handwritten-digit recognition — and integrates a confidence-gated human-in-the-loop feedback mechanism that both corrects low-confidence predictions in the current output and incrementally improves the handwritten-recognition model during deployment.</p>
+    <p>Empirical comparison of four candidate neural architectures confirmed that a convolutional architecture substantially outperforms fully connected alternatives on the handwritten-digit-recognition sub-task, and the deployed system achieved recognition accuracy above 99% following the application of the feedback mechanism, with accuracy above 95% maintained even on visually degraded scans. These results support the broader conclusion that a hybrid architecture — combining lightweight classical computer vision, task-appropriate deep-learning models, and targeted human oversight — is an effective and practical strategy for digitizing semi-structured paper records in operational settings where fully automated recognition cannot yet guarantee sufficient reliability.</p>
+    <p>Several directions for future work follow from the limitations identified in Section 6.5. The table- and cell-detection stage could be replaced or augmented with a learned document-layout-analysis model to improve robustness to layout variation beyond the RAC interview-sheet format. The printed-text extraction component could be adapted to support lightweight fine-tuning on institution-specific document corpora, closing the same feedback loop currently available only for handwritten-mark recognition. More broadly, this pipeline is illustrative of a general pattern relevant to digital-transformation initiatives in records-intensive organizations: the combination of pre-trained, general-purpose deep-learning models with domain-specific classical pre-processing and human-in-the-loop correction offers a practical route to digitizing legacy paper workflows without requiring the large labelled datasets that fully custom deep-learning solutions would demand. Extending this pipeline into a more general-purpose document-digitization framework, and evaluating it against alternative or emerging large-model-based document-understanding approaches, is identified as a natural next step.</p>
+
+    <h2 id="section-8">8. Acknowledgements</h2>
+    <p>This work was carried out during a research internship conducted at the Recruitment and Assessment Centre (RAC), Defence Research and Development Organisation (DRDO). I express my gratitude to my project mentor, Ms. Sumedha Mehta (Scientist 'B', RAC, DRDO), for her invaluable guidance, structural insights, and support throughout the development of this project.</p>
+
+    <footer>
+        Technical Report &bull; Mayank Sharma &bull; 2024
+    </footer>
+
+</div>
+
+</body>
+</html>
